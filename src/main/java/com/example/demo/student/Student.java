@@ -4,12 +4,10 @@ package com.example.demo.student;
 
 public class Student {
 
-    private Integer studentId;
-    private String studentName;
+    private final Integer studentId;
+    private final String studentName;
 
-    public Student(){}
-
-    public Student(Integer studentId, String studentName) {
+    public Student(Integer studentId, String studentName){
         this.studentId = studentId;
         this.studentName = studentName;
     }
