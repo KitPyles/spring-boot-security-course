@@ -17,12 +17,12 @@ public class StudentManagementController {
             new Student(3, "Anna Smith")
     );
 
-    @GetMapping("")
+    @GetMapping
     public static List<Student> getAllStudents() {
         return STUDENTS;
     }
 
-    @PostMapping("")
+    @PostMapping
     public void registerNewStudent(@RequestBody Student student) {
         System.out.println(student);
     }

@@ -20,11 +20,6 @@ public class StudentController {
       new Student(3, "Anna Smith")
     );
 
-    @GetMapping("")
-    public List<Student> getAllStudents() {
-        return STUDENTS;
-    }
-
     @GetMapping(path = "{studentId}")
     public Student getStudent(@PathVariable("studentId") Integer studentId) {
         return STUDENTS.stream()

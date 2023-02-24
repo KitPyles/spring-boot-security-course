@@ -30,8 +30,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable() // TODO: I will teach this in detail in the next section
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+                .antMatchers("/management/api/**").hasAnyRole("ADMIN", "TRAINEE")
                 .antMatchers("/api/**").hasRole(STUDENT.name())
                 .anyRequest().authenticated()
                 .and()
@@ -41,7 +43,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
-        UserDetails annasmithUser = User.builder()
+        UserDetails annaSmithUser = User.builder()
                 .username("annasmith")
                 .password(passwordEncoder.encode("password"))
                 .roles(STUDENT.name())
@@ -56,13 +58,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails tomUser = User.builder()
                 .username("tom")
                 .password(passwordEncoder.encode("password123"))
-                .roles(ADMINTRAINEE.name())
+                .roles(TRAINEE.name())
                 .build();
 
         return new InMemoryUserDetailsManager(
-            annasmithUser,
-            lindaUser,
-            tomUser
+                annaSmithUser,
+                lindaUser,
+                tomUser
         );
     }
 }
